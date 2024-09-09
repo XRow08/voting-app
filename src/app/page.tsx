@@ -36,8 +36,6 @@ export default function Home() {
 
     if (error) {
       setMessage('Error saving vote');
-    } else {
-      //setMessage(`You voted for ${voteType}`);
     }
 
     setLoading(false);
@@ -65,6 +63,13 @@ export default function Home() {
     };
   }, []);
 
+  // Calculate the total number of votes
+  const totalVotes = vote1Count + vote2Count;
+
+  // Calculate the percentage for each candidate
+  const vote1Percentage = totalVotes > 0 ? (vote1Count / totalVotes) * 100 : 0;
+  const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
+
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Who will be the next president?</h1>
@@ -74,7 +79,7 @@ export default function Home() {
         disabled={loading}
         style={{ marginRight: '10px', padding: '10px 20px' }}
       >
-        Kamalla ({vote1Count})
+        Kamalla ({vote1Count}) - {vote1Percentage.toFixed(2)}%
       </button>
 
       <button
@@ -82,7 +87,7 @@ export default function Home() {
         disabled={loading}
         style={{ padding: '10px 20px' }}
       >
-        Trump ({vote2Count})
+        Trump ({vote2Count}) - {vote2Percentage.toFixed(2)}%
       </button>
 
       {message && <p>{message}</p>}
