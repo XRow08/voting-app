@@ -177,11 +177,11 @@ export default function Home() {
       <div className="flex justify-between items-center w-full max-w-md mt-6">
         <div className="text-white">
           <p>Total Votes</p>
-          <p className="font-bold">{totalVotes.toLocaleString()}</p>
+          <p className="font-bold">{vote1Count.toLocaleString()}</p>
         </div>
         <div className="text-white text-right">
         <p>Total Votes</p>
-          <p className="font-bold">{totalVotes.toLocaleString()}</p>
+          <p className="font-bold">{vote2Count.toLocaleString()}</p>
         </div>
       </div>
 
