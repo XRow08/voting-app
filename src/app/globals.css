@@ -25,3 +25,19 @@ body {
     text-wrap: balance;
   }
 }
+
+/* styles.css */
+.background-section {
+  background-image: url('/images/app-bg.png');
+  background-size: cover;
+  background-position: center;
+  height: 500px; /* Adjust height as needed */
+}
+
+/* colors */
+.orange-main{
+  color: #FF6F00;
+}
+.purple-main{
+  color: #BE73FE;
+}
