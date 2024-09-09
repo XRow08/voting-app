@@ -71,14 +71,16 @@ export default function Home() {
   const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1 className="mb-20 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Who will be the next president?</h1>
+    <div
+      className="min-h-screen bg-cover bg-center p-10 text-center"
+    >
+      <h1 className="text-center mb-20 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Who will be the next president?</h1>
 
 
       <button
   onClick={() => handleVote('vote_1')}
   disabled={loading}
-  className="mr-2 px-6 py-3 h-60 rounded-full w-60 bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+  className="mr-2 px-6 py-3 h-40 rounded-full w-40 bg-blue-500 text-white font-semibold hover:bg-blue-40  transition"
 >
   Kamalla ({vote1Count}) - {vote1Percentage.toFixed(2)}%
 </button>
@@ -86,7 +88,7 @@ export default function Home() {
 <button
   onClick={() => handleVote('vote_2')}
   disabled={loading}
-  className="px-6 py-3 h-60 rounded-full w-60 bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+  className="px-6 py-3 h-40 rounded-full w-40 bg-red-500 text-white font-semibold hover:bg-red-600 transition"
 >
   Trump ({vote2Count}) - {vote2Percentage.toFixed(2)}%
 </button>
