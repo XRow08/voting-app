@@ -1,4 +1,4 @@
-// app/page.tsx or pages/index.tsx
+﻿// app/page.tsx or pages/index.tsx
 'use client'; // if using /app router
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';

@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.4.6",
     "@supabase/supabase-js": "^2.45.3",
     "next": "14.2.9",
     "react": "^18",
