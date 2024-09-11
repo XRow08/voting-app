@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from 'next/link';
 
 import VotingArea from '../components/VotingArea';
-import ProgressBar from '../components/ProgressBar';
+import VotingProgressBar from '../components/ProgressBar';
 import InfoSection from '@components/Infosection';
 import Footer from '../components/Footer';
 
@@ -89,39 +89,28 @@ export default function Home() {
       <VotingArea handleVote={handleVote} />
 
       {/* Progress Bars */}
-        <div className="flex justify-between w-full max-w-md mt-10">
+        <div className="flex justify-center gap-8 w-full max-w-md mt-8">
           {/* Trump Progress */}
           <div className="flex flex-col items-center">
             <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
               TRUMP 
               <span className="text-orange"> {vote1Percentage.toFixed(0)}%</span>
             </span>
-            <div className="bg-gray-700 w-40 h-4 rounded-full overflow-hidden mt-2">
-              <div
-                className="orange-500 h-4"
-                style={{ width: `${vote1Percentage}%` }} // Corrected inline style
-              />
-            </div>
           </div>
-
           {/* Kamala Progress */}
           <div className="flex flex-col items-center">
             <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
               KAMALA 
               <span className="text-purple"> {vote2Percentage.toFixed(0)}%</span>
             </span>
-            <div className="bg-gray-700 w-40 h-4 rounded-full overflow-hidden mt-2">
-              <div
-                className="bg-purple-500 h-4"
-                style={{ width: `${vote2Percentage}%` }} // Corrected inline style
-              />
-            </div>
           </div>
         </div>
-
+        <VotingProgressBar vote1Percentage={vote1Percentage.toFixed(0)} vote2Percentage={vote2Percentage.toFixed(0)} />
+      
 
       {/* FooterVotes */}
       <Footer vote1Count={vote1Count} vote2Count={vote2Count} />
+
 
       {/* Info Section */}
       <InfoSection />

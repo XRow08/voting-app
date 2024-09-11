@@ -18,3 +18,9 @@ body {
 .font-grotesk{
   font-family: 'Space Grotesk', sans-serif;
 }
+.rounded-left{
+  border-radius: 3px 0px 0px 3px;
+}
+.rounded-right{
+  border-radius: 0px 3px 3px 0px;
+}
