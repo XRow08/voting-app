@@ -5,6 +5,7 @@ import { supabase } from 'lib/supabaseClient';
 import Image from "next/image";
 import Link from 'next/link';
 
+
 import VotingArea from '../components/VotingArea';
 import VotingProgressBar from '../components/ProgressBar';
 import InfoSection from '@components/Infosection';
@@ -89,7 +90,7 @@ export default function Home() {
       <VotingArea handleVote={handleVote} />
 
       {/* Progress Bars */}
-        <div className="flex justify-center gap-8 w-full max-w-md mt-8">
+        <div className="flex justify-center gap-16 w-full max-w-md mt-8">
           {/* Trump Progress */}
           <div className="flex flex-col items-center">
             <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
