@@ -4,20 +4,17 @@ import Lottie from 'lottie-react';
 import animationData from 'public/assets/animations/vote-animation.json';
 
 export default function VotingArea({ handleVote }) {
-  const [clickedCandidate, setClickedCandidate] = useState(null); 
-  const lottieRef = useRef(null); 
+  const [clickedCandidate, setClickedCandidate] = useState(null); // Armazena quem foi votado
+  const lottieRef = useRef(null); // Referência para o player Lottie
 
   const handleVoteClick = (voteType) => {
     setClickedCandidate(voteType);
     handleVote(voteType);
 
-    // Se a animação já estiver rodando, reinicie
+    // Reiniciar a animação ao clicar novamente
     if (lottieRef.current) {
-      lottieRef.current.goToAndPlay(0); 
-    }    
-    setTimeout(() => {
-      setClickedCandidate(null);
-    }, 1600);
+      lottieRef.current.goToAndPlay(0); // Reinicia a animação desde o início
+    }
   };
 
   return (
@@ -29,13 +26,13 @@ export default function VotingArea({ handleVote }) {
           <Lottie
             lottieRef={lottieRef}
             animationData={animationData}
-            loop={false}
+            loop={false} // A animação roda uma vez
             style={{
               width: 200,
-              height: 200,              
-              top: -100,
+              height: 200,
               position: 'absolute',
-              zIndex: -1,
+              top: '-100px', // Move a animação para cima
+              zIndex: -1, // A animação fica atrás da imagem
             }}
           />
         )}
@@ -70,13 +67,13 @@ export default function VotingArea({ handleVote }) {
           <Lottie
             lottieRef={lottieRef}
             animationData={animationData}
-            loop={false}
+            loop={false} // A animação roda uma vez
             style={{
               width: 200,
               height: 200,
-              top: -100,
               position: 'absolute',
-              zIndex: -1,
+              top: '-100px', // Move a animação para cima
+              zIndex: -1, // A animação fica atrás da imagem
             }}
           />
         )}
