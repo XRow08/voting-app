@@ -1,6 +1,6 @@
 ﻿export default function StarSwitch() {
     return (
-                <svg width="212" height="60" viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="212" height="60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_2194_397)">
         <g clip-path="url(#clip0_2194_397)">
         <rect x="24" y="16" width="156" height="36" rx="18" fill="black"/>

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-primary text-white bg-black leading-loose;
+  }
+}
+
+body {
+  background-image: url('/assets/stars-off/app-bg.png');
+  background-size: cover;
+  background-position: center;
+  height: 500px; /* Adjust height as needed */
+}

@@ -12,10 +12,12 @@ export default function VotingArea({ handleVote }: VotingAreaProps) {
       <div className="flex flex-col items-center">
         <Image
           onClick={() => handleVote('vote_1')}
-          src="/images/trump.png"
+          src="/assets/stars-off/trump.png"
           alt="Vote for Trump"
           width={145}
           height={162}
+          quality={100}
+          priority
           className="active:scale-95 active:shadow-inner transition-transform cursor-pointer"
         />
       </div>
@@ -23,10 +25,12 @@ export default function VotingArea({ handleVote }: VotingAreaProps) {
       {/* VS Text */}
       <div className="mx-8 text-white text-2xl">
         <Image
-          src="/images/vs-icon.png"
+          src="/assets/stars-off/vs-icon.png"
           alt="VS"
           width={22}
           height={24}
+          quality={100}
+          priority
         />
       </div>
 
@@ -34,7 +38,7 @@ export default function VotingArea({ handleVote }: VotingAreaProps) {
       <div className="flex flex-col items-center">
         <Image
           onClick={() => handleVote('vote_2')}
-          src="/images/kamalla.png"
+          src="/assets/stars-off/kamalla.png"
           alt="Vote for Kamala"
           width={145}
           height={162}
