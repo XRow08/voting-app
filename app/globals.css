@@ -4,13 +4,17 @@
 
 @layer base {
   body {
-    @apply font-primary text-white bg-black leading-loose;
+    @apply font-inter text-white bg-black leading-loose;
   }
 }
 
 body {
   background-image: url('/assets/stars-off/app-bg.png');
   background-size: cover;
-  background-position: center;
+  background-position: top center;
+  background-repeat: no-repeat;
   height: 500px; /* Adjust height as needed */
+}
+.font-grotesk{
+  font-family: 'Space Grotesk', sans-serif;
 }

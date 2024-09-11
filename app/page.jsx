@@ -2,9 +2,12 @@
 'use client'; // if using /app router
 import { useEffect, useState } from 'react';
 import { supabase } from 'lib/supabaseClient';
-import Header from '../components/Header';
+import Image from "next/image";
+import Link from 'next/link';
+
 import VotingArea from '../components/VotingArea';
 import ProgressBar from '../components/ProgressBar';
+import InfoSection from '@components/Infosection';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -73,7 +76,7 @@ export default function Home() {
   const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
 
   return (
-    <div className="background-section min-h-screen flex flex-col items-center bg-cover bg-center p-6">
+    <div className="min-h-screen flex flex-col items-center p-3">
       {/* Header */}
 
       {/* Main Section */}
@@ -86,20 +89,57 @@ export default function Home() {
       <VotingArea handleVote={handleVote} />
 
       {/* Progress Bars */}
-      <div className="flex justify-between w-full max-w-md mt-10">
-        <ProgressBar name="TRUMP" percentage={vote1Percentage} color="bg-orange-500" />
-        <ProgressBar name="KAMALA" percentage={vote2Percentage} color="bg-purple-500" />
-      </div>
+        <div className="flex justify-between w-full max-w-md mt-10">
+          {/* Trump Progress */}
+          <div className="flex flex-col items-center">
+            <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
+              TRUMP 
+              <span className="text-orange"> {vote1Percentage.toFixed(0)}%</span>
+            </span>
+            <div className="bg-gray-700 w-40 h-4 rounded-full overflow-hidden mt-2">
+              <div
+                className="orange-500 h-4"
+                style={{ width: `${vote1Percentage}%` }} // Corrected inline style
+              />
+            </div>
+          </div>
 
-      {/* Footer */}
+          {/* Kamala Progress */}
+          <div className="flex flex-col items-center">
+            <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
+              KAMALA 
+              <span className="text-purple"> {vote2Percentage.toFixed(0)}%</span>
+            </span>
+            <div className="bg-gray-700 w-40 h-4 rounded-full overflow-hidden mt-2">
+              <div
+                className="bg-purple-500 h-4"
+                style={{ width: `${vote2Percentage}%` }} // Corrected inline style
+              />
+            </div>
+          </div>
+        </div>
+
+
+      {/* FooterVotes */}
       <Footer vote1Count={vote1Count} vote2Count={vote2Count} />
 
-      {/* Bet with Stars Button */}
-      <button className="mt-10 px-8 py-4 bg-orange-600 text-white font-bold rounded-full">
-        BET WITH STARS
-      </button>
+      {/* Info Section */}
+      <InfoSection />
 
-      {message && <p>{message}</p>}
+
+      {/* Bet with Stars Button */}
+      <div className="flex justify-center items-center w-full max-w-md mt-10">
+      <Link href="/">
+          <Image
+            src="/assets/stars-off/bet-with-stars.png"
+            alt="Bet With Stars"
+            width={234}
+            height={150}
+            quality={100}
+            priority
+          />
+          </Link>
+        </div>
     </div>
   );
 }

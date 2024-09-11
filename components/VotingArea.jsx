@@ -1,11 +1,7 @@
 ﻿// components/VotingArea.tsx
 import Image from 'next/image';
 
-interface VotingAreaProps {
-  handleVote: (voteType: string) => void;
-}
-
-export default function VotingArea({ handleVote }: VotingAreaProps) {
+export default function VotingArea({ handleVote }) {
   return (
     <div className="flex justify-center items-center mt-16">
       {/* Trump Section */}
@@ -23,11 +19,11 @@ export default function VotingArea({ handleVote }: VotingAreaProps) {
       </div>
 
       {/* VS Text */}
-      <div className="mx-8 text-white text-2xl">
+      <div className="mx-1 text-white text-2xl">
         <Image
           src="/assets/stars-off/vs-icon.png"
           alt="VS"
-          width={22}
+          width={40}
           height={24}
           quality={100}
           priority

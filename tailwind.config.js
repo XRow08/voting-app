@@ -19,7 +19,8 @@ module.exports = {
 		xl: '1200px'
 	},
 	fontFamily: {
-		primary: "var(--font-inter)",
+		'inter': "var(--font-inter)",
+		'space-grotesk': ['var(--font-space-grotesk)', 'sans-serif'],
 	},
   	extend: {
   		colors: {

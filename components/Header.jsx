@@ -1,6 +1,6 @@
 ﻿import Link from "next/link"
 import Image from "next/image";
-import StarSwitch from "./StarSwitch";
+import StarSwitch from "./Starswitch";
 
 const Header = () => {
   return (
@@ -17,7 +17,6 @@ const Header = () => {
             alt="Question Icon"
             width={44}
             height={44}
-            className="h-11"
             quality={100}
             priority
           />
@@ -28,7 +27,6 @@ const Header = () => {
               alt="Close"
               width={44}
               height={44}
-              className="h-11"
               quality={100}
               priority
             />
