@@ -40,8 +40,8 @@ export default function VotingArea({ handleVote }) {
           onClick={() => handleVoteClick('vote_1')}
           src="/assets/stars-off/trump.png"
           alt="Vote for Trump"
-          width={145}
-          height={162}
+          width={135}
+          height={132}
           quality={100}
           priority
           className="active:scale-95 active:shadow-inner transition-transform cursor-pointer"
@@ -81,8 +81,8 @@ export default function VotingArea({ handleVote }) {
           onClick={() => handleVoteClick('vote_2')}
           src="/assets/stars-off/kamalla.png"
           alt="Vote for Kamala"
-          width={145}
-          height={162}
+          width={135}
+          height={132}
           className="active:scale-95 active:shadow-inner transition-transform cursor-pointer"
         />
       </div>
