@@ -4,16 +4,28 @@ import Lottie from 'lottie-react';
 import animationData from 'public/assets/animations/vote-animation.json';
 
 export default function VotingArea({ handleVote }) {
-  const [clickedCandidate, setClickedCandidate] = useState(null); // Armazena quem foi votado
-  const lottieRef = useRef(null); // Referência para o player Lottie
+  const [clickedCandidate, setClickedCandidate] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const lottieRefTrump = useRef(null);
+  const lottieRefKamala = useRef(null);
 
   const handleVoteClick = (voteType) => {
-    setClickedCandidate(voteType);
-    handleVote(voteType);
+    if (!isAnimating) {
+      setClickedCandidate(voteType);
+      handleVote(voteType);
+      setIsAnimating(true);
 
-    // Reiniciar a animação ao clicar novamente
-    if (lottieRef.current) {
-      lottieRef.current.goToAndPlay(0); // Reinicia a animação desde o início
+      const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
+      if (lottieRef.current) {
+        lottieRef.current.setSpeed(2.0);
+        lottieRef.current.goToAndPlay(0);
+      }
+
+      // Reset the flip after animation
+      setTimeout(() => {
+        setClickedCandidate(null);
+        setIsAnimating(false);
+      }, 800); // Duração da animação de flip
     }
   };
 
@@ -21,31 +33,34 @@ export default function VotingArea({ handleVote }) {
     <div className="flex justify-center items-center mt-16">
       {/* Trump Section */}
       <div className="relative flex flex-col items-center">
-        {/* Exibe a animação somente se o candidato clicado for 'vote_1' */}
-        {clickedCandidate === 'vote_1' && (
-          <Lottie
-            lottieRef={lottieRef}
-            animationData={animationData}
-            loop={false} // A animação roda uma vez
-            style={{
-              width: 200,
-              height: 200,
-              position: 'absolute',
-              top: '-100px', // Move a animação para cima
-              zIndex: -1, // A animação fica atrás da imagem
-            }}
-          />
-        )}
-        <Image
-          onClick={() => handleVoteClick('vote_1')}
-          src="/assets/stars-off/trump.png"
-          alt="Vote for Trump"
-          width={135}
-          height={132}
-          quality={100}
-          priority
-          className="active:scale-95 active:shadow-inner transition-transform cursor-pointer"
+        <Lottie
+          lottieRef={lottieRefTrump}
+          animationData={animationData}
+          loop={false}
+          autoplay={false}
+          style={{
+            width: 200,
+            height: 200,
+            position: 'absolute',
+            top: '-100px',
+            zIndex: -1,
+            opacity: clickedCandidate === 'vote_1' ? 1 : 0,
+          }}
         />
+        <div className={`flip-container ${clickedCandidate === 'vote_1' ? 'flipped' : ''}`}>
+          <div className="flipper">
+            <Image
+              onClick={() => handleVoteClick('vote_1')}
+              src="/assets/stars-off/trump.png"
+              alt="Vote for Trump"
+              width={135}
+              height={132}
+              quality={100}
+              priority
+              className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
+            />
+          </div>
+        </div>
       </div>
 
       {/* VS Text */}
@@ -62,29 +77,32 @@ export default function VotingArea({ handleVote }) {
 
       {/* Kamala Section */}
       <div className="relative flex flex-col items-center">
-        {/* Exibe a animação somente se o candidato clicado for 'vote_2' */}
-        {clickedCandidate === 'vote_2' && (
-          <Lottie
-            lottieRef={lottieRef}
-            animationData={animationData}
-            loop={false} // A animação roda uma vez
-            style={{
-              width: 200,
-              height: 200,
-              position: 'absolute',
-              top: '-100px', // Move a animação para cima
-              zIndex: -1, // A animação fica atrás da imagem
-            }}
-          />
-        )}
-        <Image
-          onClick={() => handleVoteClick('vote_2')}
-          src="/assets/stars-off/kamalla.png"
-          alt="Vote for Kamala"
-          width={135}
-          height={132}
-          className="active:scale-95 active:shadow-inner transition-transform cursor-pointer"
+        <Lottie
+          lottieRef={lottieRefKamala}
+          animationData={animationData}
+          loop={false}
+          autoplay={false}
+          style={{
+            width: 200,
+            height: 200,
+            position: 'absolute',
+            top: '-100px',
+            zIndex: -1,
+            opacity: clickedCandidate === 'vote_2' ? 1 : 0,
+          }}
         />
+        <div className={`flip-container ${clickedCandidate === 'vote_2' ? 'flipped' : ''}`}>
+          <div className="flipper">
+            <Image
+              onClick={() => handleVoteClick('vote_2')}
+              src="/assets/stars-off/kamalla.png"
+              alt="Vote for Kamala"
+              width={135}
+              height={132}
+              className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
