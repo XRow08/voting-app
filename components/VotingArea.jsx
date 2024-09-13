@@ -4,28 +4,26 @@ import Lottie from 'lottie-react';
 import animationData from 'public/assets/animations/vote-animation.json';
 
 export default function VotingArea({ handleVote }) {
-  const [clickedCandidate, setClickedCandidate] = useState(null);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [flipCount, setFlipCount] = useState({ vote_1: 0, vote_2: 0 });
+  const [isAnimating, setIsAnimating] = useState({ vote_1: false, vote_2: false });
   const lottieRefTrump = useRef(null);
   const lottieRefKamala = useRef(null);
 
   const handleVoteClick = (voteType) => {
-    if (!isAnimating) {
-      setClickedCandidate(voteType);
+    if (!isAnimating[voteType]) {
+      setFlipCount(prev => ({ ...prev, [voteType]: prev[voteType] + 1 }));
       handleVote(voteType);
-      setIsAnimating(true);
+      setIsAnimating(prev => ({ ...prev, [voteType]: true }));
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
       if (lottieRef.current) {
-        lottieRef.current.setSpeed(2.0);
+        lottieRef.current.setSpeed(4.0);
         lottieRef.current.goToAndPlay(0);
       }
 
-      // Reset the flip after animation
       setTimeout(() => {
-        setClickedCandidate(null);
-        setIsAnimating(false);
-      }, 800); // Duração da animação de flip
+        setIsAnimating(prev => ({ ...prev, [voteType]: false }));
+      }, 300); // Duração da animação de flip
     }
   };
 
@@ -44,10 +42,10 @@ export default function VotingArea({ handleVote }) {
             position: 'absolute',
             top: '-100px',
             zIndex: -1,
-            opacity: clickedCandidate === 'vote_1' ? 1 : 0,
+            opacity: isAnimating.vote_1 ? 1 : 0,
           }}
         />
-        <div className={`flip-container ${clickedCandidate === 'vote_1' ? 'flipped' : ''}`}>
+        <div className={`flip-container`} style={{ transform: `rotateY(${flipCount.vote_1 * 360}deg)` }}>
           <div className="flipper">
             <Image
               onClick={() => handleVoteClick('vote_1')}
@@ -88,10 +86,10 @@ export default function VotingArea({ handleVote }) {
             position: 'absolute',
             top: '-100px',
             zIndex: -1,
-            opacity: clickedCandidate === 'vote_2' ? 1 : 0,
+            opacity: isAnimating.vote_2 ? 1 : 0,
           }}
         />
-        <div className={`flip-container ${clickedCandidate === 'vote_2' ? 'flipped' : ''}`}>
+        <div className={`flip-container`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
           <div className="flipper">
             <Image
               onClick={() => handleVoteClick('vote_2')}
