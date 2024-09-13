@@ -25,9 +25,9 @@ export default function VotingArea({ handleVote }) {
         audioRef.current.play().catch(error => console.error("Error playing audio:", error));
       }
 
-      // Vibrate for mobile devices
+      // Vibrate for mobile devices that support it
       if (navigator.vibrate) {
-        navigator.vibrate(50); // Vibrate for 50ms
+        navigator.vibrate(100); // Increased to 100ms for stronger effect
       }
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
@@ -60,7 +60,7 @@ export default function VotingArea({ handleVote }) {
             opacity: isAnimating.vote_1 ? 1 : 0,
           }}
         />
-        <div className={`flip-container`} style={{ transform: `rotateY(${flipCount.vote_1 * 360}deg)` }}>
+        <div className={`flip-container ${isAnimating.vote_1 ? 'shake' : ''}`} style={{ transform: `rotateY(${flipCount.vote_1 * 360}deg)` }}>
           <div className="flipper">
             <Image
               onClick={() => handleVoteClick('vote_1')}
@@ -104,7 +104,7 @@ export default function VotingArea({ handleVote }) {
             opacity: isAnimating.vote_2 ? 1 : 0,
           }}
         />
-        <div className={`flip-container`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
+        <div className={`flip-container ${isAnimating.vote_2 ? 'shake' : ''}`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
           <div className="flipper">
             <Image
               onClick={() => handleVoteClick('vote_2')}
