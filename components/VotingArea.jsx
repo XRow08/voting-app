@@ -1,4 +1,4 @@
-﻿import { useState, useRef } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Lottie from 'lottie-react';
 import animationData from 'public/assets/animations/vote-animation.json';
@@ -8,12 +8,27 @@ export default function VotingArea({ handleVote }) {
   const [isAnimating, setIsAnimating] = useState({ vote_1: false, vote_2: false });
   const lottieRefTrump = useRef(null);
   const lottieRefKamala = useRef(null);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio('/assets/animations/coin.wav');
+  }, []);
 
   const handleVoteClick = (voteType) => {
     if (!isAnimating[voteType]) {
       setFlipCount(prev => ({ ...prev, [voteType]: prev[voteType] + 1 }));
       handleVote(voteType);
       setIsAnimating(prev => ({ ...prev, [voteType]: true }));
+
+      // Play the coin sound
+      if (audioRef.current) {
+        audioRef.current.play().catch(error => console.error("Error playing audio:", error));
+      }
+
+      // Vibrate for mobile devices
+      if (navigator.vibrate) {
+        navigator.vibrate(50); // Vibrate for 50ms
+      }
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
       if (lottieRef.current) {
