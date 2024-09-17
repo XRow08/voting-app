@@ -71,10 +71,10 @@ export default function VotingArea({ handleVote }) {
               onClick={() => handleVoteClick('vote_1')}
               src="/assets/stars-off/trump.png"
               alt="Vote for Trump"
-              width={135}
-              height={132}
+              width={145}
+              height={163}
               quality={100}
-              priority
+              
               className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
             />
           </div>
@@ -109,14 +109,15 @@ export default function VotingArea({ handleVote }) {
             opacity: isAnimating.vote_2 ? 1 : 0,
           }}
         />
-        <div className={`flip-container ${isAnimating.vote_2 ? 'shake' : ''}`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
+        <div className={`flip-container ${isAnimating.vote_2 ? 'shake-hard' : ''}`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
           <div className="flipper">
             <Image
               onClick={() => handleVoteClick('vote_2')}
               src="/assets/stars-off/kamalla.png"
               alt="Vote for Kamala"
-              width={135}
-              height={132}
+              width={145}
+              height={163}
+              quality={100}
               className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
             />
           </div>

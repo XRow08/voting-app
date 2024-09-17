@@ -77,7 +77,7 @@ export default function Home() {
   const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-3">
+    <div className="min-h-screen flex flex-col items-center p-3 max-w-sm mx-auto">
       {/* Header */}
 
       {/* Main Section */}
@@ -95,14 +95,14 @@ export default function Home() {
           <div className="flex flex-col items-center">
             <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
               TRUMP 
-              <span className="text-orange"> {vote1Percentage.toFixed(0)}%</span>
+              <span className="text-redtrump"> {vote1Percentage.toFixed(0)}%</span>
             </span>
           </div>
           {/* Kamala Progress */}
           <div className="flex flex-col items-center">
             <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
               KAMALA 
-              <span className="text-purple"> {vote2Percentage.toFixed(0)}%</span>
+              <span className="text-bluekamala"> {vote2Percentage.toFixed(0)}%</span>
             </span>
           </div>
         </div>

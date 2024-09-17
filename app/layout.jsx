@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} antialiased`} // Apply both Space Grotesk and Inter globally
+        className={`${spaceGrotesk.variable} ${inter.variable} antialiased max-w-sm mx-auto`} // Apply both Space Grotesk and Inter globally
       >
         <Header />
         {children}

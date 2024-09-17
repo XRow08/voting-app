@@ -10,7 +10,7 @@
         {Array.from({ length: vote1Blocks }).map((_, index) => (
           <div
             key={index}
-            className={`bg-orange h-6 w-2 ${
+            className={`bg-redtrump h-6 w-2 ${
               index === 0 ? 'rounded-left' : ''
             } ${index === vote1Blocks - 1 ? 'rounded-right' : ''} mr-0.5`}
           />
@@ -22,7 +22,7 @@
         {Array.from({ length: vote2Blocks }).map((_, index) => (
           <div
             key={index}
-            className={`bg-purple h-6 w-2 ${
+            className={`bg-bluekamala h-6 w-2 ${
               index === 0 ? 'rounded-left' : ''
             } ${index === vote2Blocks - 1 ? 'rounded-right' : ''} mr-0.5`}
           />

@@ -26,8 +26,8 @@ module.exports = {
   		colors: {
 			primary: "#ffffff",
 			secondary:"#6B6B6B",
-			orange: "#FF6F00",
-			purple: "#BE73FE",
+			redtrump: "#FF1414",
+			bluekamala: "#3037FF",
   			border: 'rgba(255, 255, 255, 0.1)',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
