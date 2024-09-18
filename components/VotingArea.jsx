@@ -16,7 +16,7 @@ export default function VotingArea({ handleVote }) {
 
   const vibrate = () => {
     if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      navigator.vibrate(200);
+      navigator.vibrate(2000);
     }
   };
 
@@ -44,9 +44,7 @@ export default function VotingArea({ handleVote }) {
         setIsFlashing(false);
       }, 300); // Duração da animação de flip
 
-      // Mostrar feedback visual
-      //setShowFeedback(true);
-      setTimeout(() => setShowFeedback(false), 1000);
+      
     }
   };
 
@@ -125,13 +123,6 @@ export default function VotingArea({ handleVote }) {
           </div>
         </div>
       </div>
-      {showFeedback && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white bg-opacity-80 text-black p-4 rounded-lg">
-            Voto registrado!
-          </div>
-        </div>
-      )}
     </div>
   );
 }
