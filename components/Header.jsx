@@ -25,7 +25,7 @@ const Header = () => {
             {...imageProps}
           />
         </Link>
-        <Link href="/">
+        <Link href="https://x.com/duelstakes?s=duelstakes" target="_blank">
           <Image
             src="/assets/stars-off/x-icon.png"
             alt="Close"
