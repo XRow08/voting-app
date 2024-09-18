@@ -13,7 +13,7 @@ export default function VotingArea({ handleVote }) {
 
   useEffect(() => {
     audioRef.current = new Audio('/assets/animations/vote_sound.wav');
-    audioRef.current.playbackRate = 2; // Set playback rate to 3x
+    audioRef.current.playbackRate = 1; // Set playback rate to 3x
   }, []);
 
   const handleVoteClick = (voteType) => {
