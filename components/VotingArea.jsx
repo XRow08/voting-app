@@ -7,14 +7,20 @@ export default function VotingArea({ handleVote }) {
   const [flipCount, setFlipCount] = useState({ vote_1: 0, vote_2: 0 });
   const [isAnimating, setIsAnimating] = useState({ vote_1: false, vote_2: false });
   const [isFlashing, setIsFlashing] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const lottieRefTrump = useRef(null);
   const lottieRefKamala = useRef(null);
   const audioRef = useRef(null);
 
   const vibrate = () => {
-    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      // Vibrar por 200ms, pausa por 100ms, vibrar por 200ms
-      navigator.vibrate([200, 100, 200]);
+    if (typeof window !== 'undefined') {
+      if ('vibrate' in navigator) {
+        // Tenta vibrar por 1 segundo
+        navigator.vibrate(1000);
+      } else if ('Vibrate' in window) {
+        // Fallback para alguns dispositivos Android antigos
+        window.Vibrate(1000);
+      }
     }
   };
 
@@ -36,8 +42,11 @@ export default function VotingArea({ handleVote }) {
         audioRef.current.play().catch(error => console.error("Error playing audio:", error));
       }
 
-      // Ativar vibração
+      // Tenta vibrar
       vibrate();
+
+      // Tenta vibrar novamente após um curto delay
+      setTimeout(vibrate, 100);
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
       if (lottieRef.current) {
@@ -49,6 +58,10 @@ export default function VotingArea({ handleVote }) {
         setIsAnimating(prev => ({ ...prev, [voteType]: false }));
         setIsFlashing(false);
       }, 300); // Duração da animação de flip
+
+      // Mostrar feedback visual
+      setShowFeedback(true);
+      setTimeout(() => setShowFeedback(false), 1000);
     }
   };
 
