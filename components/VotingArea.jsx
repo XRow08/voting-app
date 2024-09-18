@@ -1,24 +1,20 @@
-﻿import { useState, useRef } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Lottie from 'lottie-react';
-import useSound from 'use-sound';
 import animationData from 'public/assets/animations/vote-animation.json';
 
 export default function VotingArea({ handleVote }) {
   const [flipCount, setFlipCount] = useState({ vote_1: 0, vote_2: 0 });
   const [isAnimating, setIsAnimating] = useState({ vote_1: false, vote_2: false });
   const [isFlashing, setIsFlashing] = useState(false);
-  const [showFeedback, setShowFeedback] = useState(false);
   const lottieRefTrump = useRef(null);
   const lottieRefKamala = useRef(null);
-  
-  const [playSound] = useSound('/assets/animations/vote_sound.wav', { volume: 0.5 });
+  const audioRef = useRef(null);
 
-  const vibrate = () => {
-    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      navigator.vibrate(2000);
-    }
-  };
+  useEffect(() => {
+    audioRef.current = new Audio('/assets/animations/vote_sound.wav');
+    audioRef.current.playbackRate = 2; // Set playback rate to 3x
+  }, []);
 
   const handleVoteClick = (voteType) => {
     if (!isAnimating[voteType]) {
@@ -27,11 +23,16 @@ export default function VotingArea({ handleVote }) {
       setIsAnimating(prev => ({ ...prev, [voteType]: true }));
       setIsFlashing(true);
 
-      // Play sound
-      playSound();
+      // Play the coin sound at 3x speed
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0; // Reset audio to start
+        audioRef.current.play().catch(error => console.error("Error playing audio:", error));
+      }
 
-      // Vibrate
-      vibrate();
+      // Vibrate for mobile devices that support it
+      if (navigator.vibrate) {
+        navigator.vibrate(2000);
+      }
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
       if (lottieRef.current) {
@@ -43,8 +44,6 @@ export default function VotingArea({ handleVote }) {
         setIsAnimating(prev => ({ ...prev, [voteType]: false }));
         setIsFlashing(false);
       }, 300); // Duração da animação de flip
-
-      
     }
   };
 
@@ -75,6 +74,7 @@ export default function VotingArea({ handleVote }) {
               width={145}
               height={163}
               quality={100}
+              
               className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
             />
           </div>
