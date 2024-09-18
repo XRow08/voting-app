@@ -12,7 +12,7 @@ export default function VotingArea({ handleVote }) {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    audioRef.current = new Audio('/assets/animations/coin.wav');
+    audioRef.current = new Audio('/assets/animations/vote_sound.wav');
     audioRef.current.playbackRate = 3; // Set playback rate to 3x
   }, []);
 
