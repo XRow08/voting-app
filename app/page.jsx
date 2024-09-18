@@ -8,6 +8,7 @@ import VotingArea from '../components/VotingArea';
 import VotingProgressBar from '../components/ProgressBar';
 import InfoSection from '@components/Infosection';
 import Footer from '../components/Footer';
+import YourVotes from '../components/YourVotes';
 
 export default function Home() {
   const [vote1Count, setVote1Count] = useState(0);
@@ -15,6 +16,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [showOverlay, setShowOverlay] = useState(true);
+  const [userVotes, setUserVotes] = useState(0);
+  const [showYourVotes, setShowYourVotes] = useState(false);
 
   // Function to fetch the current vote counts
   const fetchVotes = async () => {
@@ -42,6 +45,8 @@ export default function Home() {
 
     if (error) {
       setMessage('Error saving vote');
+    } else {
+      setUserVotes(prev => prev + 1);
     }
 
     setLoading(false);
@@ -117,14 +122,19 @@ export default function Home() {
 
       {/* Header */}
 
+
       {/* Main Section */}
-      <div className="text-center mt-12 z-50">
-        <h1 className="font-space-grotesk text-[24px] text-white font-light leading-[24px] text-center">TAP TO VOTE</h1>
-        <h2 className="font-space-grotesk text-[35.16px] font-bold text-white leading-[35.16px] text-center mt-2">WHO WILL BE THE NEXT PRESIDENT?</h2>
+      <div className="text-center mt-4 z-10">
+        <h1 className="font-space-grotesk text-[16px] text-white font-light leading-[16px] text-center">TAP TO VOTE</h1>
+        <h2 className="font-space-grotesk text-[24px] font-bold text-white leading-[24px] text-center mt-2">WHO WILL BE THE NEXT PRESIDENT?</h2>
       </div>
 
       {/* Voting Area */}
       <VotingArea handleVote={handleVote} />
+
+      {/* Your Votes Section */}
+      <YourVotes userVotes={userVotes} />
+      
 
       {/* Progress Bars */}
         <div className="flex justify-center gap-16 w-full max-w-md mt-8">
@@ -167,6 +177,8 @@ export default function Home() {
           />
           </Link>
         </div>
+
+
     </div>
   );
 }

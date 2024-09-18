@@ -48,7 +48,7 @@ export default function VotingArea({ handleVote }) {
   };
 
   return (
-    <div className={`flex justify-center items-center mt-16 ${isFlashing ? 'flash' : ''}`}>
+    <div className={`flex justify-center items-center mt-10 ${isFlashing ? 'flash' : ''}`}>
       {/* Trump Section */}
       <div className="relative flex flex-col items-center">
         <Lottie
