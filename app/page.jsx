@@ -1,10 +1,8 @@
-
 'use client'; // if using /app router
 import { useEffect, useState } from 'react';
 import { supabase } from 'lib/supabaseClient';
 import Image from "next/image";
 import Link from 'next/link';
-
 
 import VotingArea from '../components/VotingArea';
 import VotingProgressBar from '../components/ProgressBar';
@@ -16,6 +14,7 @@ export default function Home() {
   const [vote2Count, setVote2Count] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [showOverlay, setShowOverlay] = useState(true);
 
   // Function to fetch the current vote counts
   const fetchVotes = async () => {
@@ -76,12 +75,50 @@ export default function Home() {
   const vote1Percentage = totalVotes > 0 ? (vote1Count / totalVotes) * 100 : 0;
   const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
 
+  useEffect(() => {
+    if (showOverlay) {
+      const timer = setTimeout(() => {
+        setShowOverlay(false);
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showOverlay]);
+
+  const handleOverlayClick = () => {
+    setShowOverlay(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center p-3 max-w-sm mx-auto">
+      {showOverlay && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={handleOverlayClick}
+        >
+          <div className="relative">
+            <Image
+              src="/assets/stars-off/animation-bg.png"
+              alt="Animation Background"
+              width={150}
+              height={150}
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="/assets/stars-off/hands-animation.gif"
+                alt="Hands Animation"
+                width={100}
+                height={100}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
 
       {/* Main Section */}
-      <div className="text-center mt-12">
+      <div className="text-center mt-12 z-50">
         <h1 className="font-space-grotesk text-[24px] text-white font-light leading-[24px] text-center">TAP TO VOTE</h1>
         <h2 className="font-space-grotesk text-[35.16px] font-bold text-white leading-[35.16px] text-center mt-2">WHO WILL BE THE NEXT PRESIDENT?</h2>
       </div>
