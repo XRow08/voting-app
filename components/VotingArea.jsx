@@ -7,13 +7,14 @@ export default function VotingArea({ handleVote }) {
   const [flipCount, setFlipCount] = useState({ vote_1: 0, vote_2: 0 });
   const [isAnimating, setIsAnimating] = useState({ vote_1: false, vote_2: false });
   const [isFlashing, setIsFlashing] = useState(false);
+  const [kamalaKey, setKamalaKey] = useState(0); // Novo estado para forçar re-render
   const lottieRefTrump = useRef(null);
   const lottieRefKamala = useRef(null);
   const audioRef = useRef(null);
 
   useEffect(() => {
     audioRef.current = new Audio('/assets/animations/vote_sound.wav');
-    audioRef.current.playbackRate = 1; // Set playback rate to 3x
+    audioRef.current.playbackRate = 1;
   }, []);
 
   const handleVoteClick = (voteType) => {
@@ -23,15 +24,17 @@ export default function VotingArea({ handleVote }) {
       setIsAnimating(prev => ({ ...prev, [voteType]: true }));
       setIsFlashing(true);
 
-      // Play the coin sound at 3x speed
       if (audioRef.current) {
-        audioRef.current.currentTime = 0; // Reset audio to start
+        audioRef.current.currentTime = 0;
         audioRef.current.play().catch(error => console.error("Error playing audio:", error));
       }
 
-      // Vibrate for mobile devices that support it
       if (navigator.vibrate) {
-        navigator.vibrate(2000);
+        navigator.vibrate(200);
+      }
+
+      if (voteType === 'vote_2') {
+        setKamalaKey(prev => prev + 1); // Incrementa a key para forçar re-render
       }
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
@@ -43,7 +46,7 @@ export default function VotingArea({ handleVote }) {
       setTimeout(() => {
         setIsAnimating(prev => ({ ...prev, [voteType]: false }));
         setIsFlashing(false);
-      }, 300); // Duração da animação de flip
+      }, 500); // Reduzido para 500ms para coincidir com a duração da animação
     }
   };
 
@@ -62,7 +65,7 @@ export default function VotingArea({ handleVote }) {
             position: 'absolute',
             top: '-100px',
             zIndex: -1,
-            opacity: isAnimating.vote_1 ? 0.5 : 0, // Alterado para 0.5 (50% de opacidade)
+            opacity: isAnimating.vote_1 ? 0.5 : 0,
           }}
         />
         <div className={`flip-container ${isAnimating.vote_1 ? 'shake-hard' : ''}`} style={{ transform: `rotateY(${flipCount.vote_1 * 360}deg)` }}>
@@ -74,7 +77,6 @@ export default function VotingArea({ handleVote }) {
               width={145}
               height={163}
               quality={100}
-              
               className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
             />
           </div>
@@ -95,32 +97,18 @@ export default function VotingArea({ handleVote }) {
 
       {/* Kamala Section */}
       <div className="relative flex flex-col items-center">
-        <Lottie
-          lottieRef={lottieRefKamala}
-          animationData={animationData}
-          loop={false}
-          autoplay={false}
-          style={{
-            width: 200,
-            height: 200,
-            position: 'absolute',
-            top: '-100px',
-            zIndex: -1,
-            opacity: isAnimating.vote_2 ? 0.5 : 0, // Alterado para 0.5 (50% de opacidade)
-          }}
-        />
-        <div className={`flip-container ${isAnimating.vote_2 ? 'shake-hard' : ''}`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
-          <div className="flipper">
+        <div key={kamalaKey} className={`coin ${isAnimating.vote_2 ? 'flip-coin' : ''}`} onClick={() => handleVoteClick('vote_2')}>
+          <div className="side-a">
             <Image
-              onClick={() => handleVoteClick('vote_2')}
               src="/assets/stars-off/kamalla.png"
               alt="Vote for Kamala"
               width={145}
               height={163}
               quality={100}
-              className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
+              className="active:scale-95 active:shadow-inner transition-transform cursor-pointer"
             />
           </div>
+          <div className="side-b"></div>
         </div>
       </div>
     </div>
