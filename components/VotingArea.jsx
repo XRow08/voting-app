@@ -1,6 +1,7 @@
-﻿import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Lottie from 'lottie-react';
+import useSound from 'use-sound';
 import animationData from 'public/assets/animations/vote-animation.json';
 
 export default function VotingArea({ handleVote }) {
@@ -10,24 +11,14 @@ export default function VotingArea({ handleVote }) {
   const [showFeedback, setShowFeedback] = useState(false);
   const lottieRefTrump = useRef(null);
   const lottieRefKamala = useRef(null);
-  const audioRef = useRef(null);
+  
+  const [playSound] = useSound('/assets/animations/vote_sound.wav', { volume: 0.5 });
 
   const vibrate = () => {
-    if (typeof window !== 'undefined') {
-      if ('vibrate' in navigator) {
-        // Tenta vibrar por 1 segundo
-        navigator.vibrate(1000);
-      } else if ('Vibrate' in window) {
-        // Fallback para alguns dispositivos Android antigos
-        window.Vibrate(1000);
-      }
+    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+      navigator.vibrate(200);
     }
   };
-
-  useEffect(() => {
-    audioRef.current = new Audio('/assets/animations/vote_sound.wav');
-    audioRef.current.playbackRate = 3; // Set playback rate to 3x
-  }, []);
 
   const handleVoteClick = (voteType) => {
     if (!isAnimating[voteType]) {
@@ -36,17 +27,11 @@ export default function VotingArea({ handleVote }) {
       setIsAnimating(prev => ({ ...prev, [voteType]: true }));
       setIsFlashing(true);
 
-      // Play the coin sound at 3x speed
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0; // Reset audio to start
-        audioRef.current.play().catch(error => console.error("Error playing audio:", error));
-      }
+      // Play sound
+      playSound();
 
-      // Tenta vibrar
+      // Vibrate
       vibrate();
-
-      // Tenta vibrar novamente após um curto delay
-      setTimeout(vibrate, 100);
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
       if (lottieRef.current) {
@@ -60,7 +45,7 @@ export default function VotingArea({ handleVote }) {
       }, 300); // Duração da animação de flip
 
       // Mostrar feedback visual
-      setShowFeedback(true);
+      //setShowFeedback(true);
       setTimeout(() => setShowFeedback(false), 1000);
     }
   };
@@ -92,7 +77,6 @@ export default function VotingArea({ handleVote }) {
               width={145}
               height={163}
               quality={100}
-              
               className="front active:scale-95 active:shadow-inner transition-transform cursor-pointer"
             />
           </div>
@@ -141,6 +125,13 @@ export default function VotingArea({ handleVote }) {
           </div>
         </div>
       </div>
+      {showFeedback && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white bg-opacity-80 text-black p-4 rounded-lg">
+            Voto registrado!
+          </div>
+        </div>
+      )}
     </div>
   );
 }
