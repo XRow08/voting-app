@@ -62,7 +62,7 @@ export default function VotingArea({ handleVote }) {
             position: 'absolute',
             top: '-100px',
             zIndex: -1,
-            opacity: isAnimating.vote_1 ? 1 : 0,
+            opacity: isAnimating.vote_1 ? 0.5 : 0, // Alterado para 0.5 (50% de opacidade)
           }}
         />
         <div className={`flip-container ${isAnimating.vote_1 ? 'shake-hard' : ''}`} style={{ transform: `rotateY(${flipCount.vote_1 * 360}deg)` }}>
@@ -106,7 +106,7 @@ export default function VotingArea({ handleVote }) {
             position: 'absolute',
             top: '-100px',
             zIndex: -1,
-            opacity: isAnimating.vote_2 ? 1 : 0,
+            opacity: isAnimating.vote_2 ? 0.5 : 0, // Alterado para 0.5 (50% de opacidade)
           }}
         />
         <div className={`flip-container ${isAnimating.vote_2 ? 'shake-hard' : ''}`} style={{ transform: `rotateY(${flipCount.vote_2 * 360}deg)` }}>
