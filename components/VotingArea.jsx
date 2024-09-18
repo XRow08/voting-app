@@ -11,6 +11,13 @@ export default function VotingArea({ handleVote }) {
   const lottieRefKamala = useRef(null);
   const audioRef = useRef(null);
 
+  const vibrate = () => {
+    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+      // Vibrar por 200ms, pausa por 100ms, vibrar por 200ms
+      navigator.vibrate([200, 100, 200]);
+    }
+  };
+
   useEffect(() => {
     audioRef.current = new Audio('/assets/animations/vote_sound.wav');
     audioRef.current.playbackRate = 3; // Set playback rate to 3x
@@ -29,10 +36,8 @@ export default function VotingArea({ handleVote }) {
         audioRef.current.play().catch(error => console.error("Error playing audio:", error));
       }
 
-      // Vibrate for mobile devices that support it
-      if (navigator.vibrate) {
-        navigator.vibrate(100);
-      }
+      // Ativar vibração
+      vibrate();
 
       const lottieRef = voteType === 'vote_1' ? lottieRefTrump : lottieRefKamala;
       if (lottieRef.current) {
