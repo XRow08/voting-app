@@ -1,8 +1,11 @@
 import Image from 'next/image';
 
 export default function YourVotes({ userVotes }) {
+
+   const formattedVotes = userVotes.toLocaleString();
+
     return (
-        <div className="flex justify-between items-center w-full mb-8 mt-4 bg-[#1E1E1E] rounded-full p-2">
+        <div className="flex justify-around items-center w-72 mt-8 border border-white rounded-full p-2">
             <div className="flex items-center">
                 <div className="relative mr-3">
                     <Image
@@ -20,11 +23,13 @@ export default function YourVotes({ userVotes }) {
                         />
                     </div>
                 </div>
-                <span className="text-white font-semibold text-sm">Your Votes</span>
             </div>
-            <div className="bg-[#2C2C2C] rounded-full p-1">
-                <div className="bg-[#1E1E1E] rounded-full w-8 h-8 flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">{userVotes}</span>
+            <div className="flex items-center">
+            <span className="text-white font-semibold text-sm justify-center">YOUR VOTES</span>
+            </div>
+            <div className="border border-[#6B6B6B] rounded-full">
+                <div className="bg-[#000000] rounded-full flex items-center justify-center py-2 px-6">
+                    <span className="text-white font-bold text-sm"> {formattedVotes} </span>
                 </div>
             </div>
         </div>
