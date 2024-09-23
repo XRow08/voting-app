@@ -1,5 +1,6 @@
 'use client'; // if using /app router
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import StartingPage from '../components/StartingPage';
 import { supabase } from 'lib/supabaseClient';
 import Image from "next/image";
 import Link from 'next/link';
@@ -11,6 +12,7 @@ import Footer from '../components/Footer';
 import YourVotes from '../components/YourVotes';
 
 export default function Home() {
+  const [showStartingPage, setShowStartingPage] = useState(true);
   const [vote1Count, setVote1Count] = useState(0);
   const [vote2Count, setVote2Count] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -18,6 +20,14 @@ export default function Home() {
   const [showOverlay, setShowOverlay] = useState(true);
   const [userVotes, setUserVotes] = useState(0);
   const [showYourVotes, setShowYourVotes] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowStartingPage(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Function to fetch the current vote counts
   const fetchVotes = async () => {
@@ -73,13 +83,6 @@ export default function Home() {
     };
   }, []);
 
-  // Calculate the total number of votes
-  const totalVotes = vote1Count + vote2Count;
-
-  // Calculate the percentage for each candidate
-  const vote1Percentage = totalVotes > 0 ? (vote1Count / totalVotes) * 100 : 0;
-  const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
-
   useEffect(() => {
     if (showOverlay) {
       const timer = setTimeout(() => {
@@ -93,6 +96,17 @@ export default function Home() {
   const handleOverlayClick = () => {
     setShowOverlay(false);
   };
+
+  // Calculate the total number of votes
+  const totalVotes = vote1Count + vote2Count;
+
+  // Calculate the percentage for each candidate
+  const vote1Percentage = totalVotes > 0 ? (vote1Count / totalVotes) * 100 : 0;
+  const vote2Percentage = totalVotes > 0 ? (vote2Count / totalVotes) * 100 : 0;
+
+  if (showStartingPage) {
+    return <StartingPage />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center p-3 max-w-sm mx-auto">
@@ -120,9 +134,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Header */}
-
-
       {/* Main Section */}
       <div className="text-center mt-4 z-50">
         <h1 className="font-space-grotesk text-[16px] text-white font-light leading-[16px] text-center">TAP TO VOTE</h1>
@@ -135,38 +146,34 @@ export default function Home() {
       {/* Your Votes Section */}
       <YourVotes userVotes={userVotes} />
       
-
       {/* Progress Bars */}
-        <div className="flex justify-center gap-16 w-full max-w-md mt-8">
-          {/* Trump Progress */}
-          <div className="flex flex-col items-center">
-            <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
-              TRUMP 
-              <span className="text-redtrump"> {vote1Percentage.toFixed(0)}%</span>
-            </span>
-          </div>
-          {/* Kamala Progress */}
-          <div className="flex flex-col items-center">
-            <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
-              KAMALA 
-              <span className="text-bluekamala"> {vote2Percentage.toFixed(0)}%</span>
-            </span>
-          </div>
+      <div className="flex justify-center gap-16 w-full max-w-md mt-8">
+        {/* Trump Progress */}
+        <div className="flex flex-col items-center">
+          <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
+            TRUMP 
+            <span className="text-redtrump"> {vote1Percentage.toFixed(0)}%</span>
+          </span>
         </div>
-        <VotingProgressBar vote1Percentage={vote1Percentage.toFixed(0)} vote2Percentage={vote2Percentage.toFixed(0)} />
+        {/* Kamala Progress */}
+        <div className="flex flex-col items-center">
+          <span className="font-inter text-[16px] font-normal leading-[16px] text-center text-white">
+            KAMALA 
+            <span className="text-bluekamala"> {vote2Percentage.toFixed(0)}%</span>
+          </span>
+        </div>
+      </div>
+      <VotingProgressBar vote1Percentage={vote1Percentage.toFixed(0)} vote2Percentage={vote2Percentage.toFixed(0)} />
       
-
       {/* FooterVotes */}
       <Footer vote1Count={vote1Count} vote2Count={vote2Count} />
-
 
       {/* Info Section */}
       <InfoSection />
 
-
       {/* Bet with Stars Button */}
       <div className="flex justify-center items-center w-full max-w-md mt-10">
-      <Link href="/">
+        <Link href="/">
           <Image
             src="/assets/stars-off/bet-with-stars.png"
             alt="Bet With Stars"
@@ -175,10 +182,8 @@ export default function Home() {
             quality={100}
             priority
           />
-          </Link>
-        </div>
-
-
+        </Link>
+      </div>
     </div>
   );
 }
