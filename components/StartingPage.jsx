@@ -1,16 +1,9 @@
 'use client';
 
-
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 
-
-
-
-export default function StartingPage() {
-  const router = useRouter();
+export default function StartingPage({ onFinish }) {
   const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
@@ -19,23 +12,26 @@ export default function StartingPage() {
     }, 1000);
 
     const redirect = setTimeout(() => {
-      router.push('/');
+      onFinish();
     }, 5000);
 
     return () => {
       clearInterval(timer);
       clearTimeout(redirect);
     };
-  }, [router]);
+  }, [onFinish]);
 
   return (
-    <html lang="en">
-      <body>
-        <div className="absolute bottom-10 text-white text-2xl">
-          Redirecionando em {countdown}...
-        </div>
-      </body>
-    </html>
+    <div className="flex flex-col items-center justify-center h-screen bg-black">
+      <Image
+        src="/assets/logo.png"
+        alt="Logo"
+        width={200}
+        height={200}
+      />
+      <div className="text-white text-2xl mt-4">
+        Redirecionando em {countdown}...
+      </div>
+    </div>
   );
-  
 }
