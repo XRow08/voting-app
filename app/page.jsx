@@ -11,7 +11,7 @@ import Footer from '../components/Footer';
 import YourVotes from '../components/YourVotes';
 import StartingPage from '../components/StartingPage';
 
-const SESSION_DURATION = 60 * 60 * 1000; // 1 hora em milissegundos
+const SESSION_DURATION = 60 * 60 * 1000; // 1h session duration to show starting page
 
 export default function Home() {
   const [vote1Count, setVote1Count] = useState(0);
