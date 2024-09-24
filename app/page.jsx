@@ -4,12 +4,12 @@ import { supabase } from 'lib/supabaseClient';
 import Image from "next/image";
 import Link from 'next/link';
 
-import VotingArea from '../components/VotingArea';
-import VotingProgressBar from '../components/ProgressBar';
-import InfoSection from '@components/Infosection';
-import Footer from '../components/Footer';
-import YourVotes from '../components/YourVotes';
-import StartingPage from '../components/StartingPage';
+import VotingArea from '../components/starsOff/VotingArea';
+import VotingProgressBar from '../components/starsOff/ProgressBar';
+import InfoSection from '@components/starsOff/Infosection';
+import Footer from '../components/starsOff/Footer';
+import YourVotes from '../components/starsOff/YourVotes';
+import StartingPage from '../components/starsOff/StartingPage';
 
 const SESSION_DURATION = 60 * 60 * 1000; // 1h session duration to show starting page
 

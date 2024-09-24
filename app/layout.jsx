@@ -1,7 +1,7 @@
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
-import Header from "@components/Header";
+import Header from "@components/starsOff/Header";
 
 
 // Import Space Grotesk from Google Fonts

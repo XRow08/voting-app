@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/Footer.jsx", "components/Infosection.jsx", "components/ProgressBar.jsx", "components/Starswitch.jsx", "components/VotingArea.jsx"  ],
+, "components/starsOff/Footer.jsx", "components/starsOff/Infosection.jsx", "components/starsOff/ProgressBar.jsx", "components/starsOff/Starswitch.jsx", "components/starsOff/VotingArea.jsx"  ],
   "exclude": [
     "node_modules"
   ]
