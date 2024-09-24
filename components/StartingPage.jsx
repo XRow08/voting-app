@@ -7,7 +7,7 @@ export default function StartingPage({ onFinish }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 50000;
+    const duration = 2500;
     const interval = 50;
     const steps = duration / interval;
 
@@ -30,7 +30,7 @@ export default function StartingPage({ onFinish }) {
 
   return (
     <div className="flex items-center justify-center h-screen relative overflow-hidden">
-      <div className="w-[327px] h-[480px] flex flex-col items-center justify-center relative py-16 rounded-[16px]"
+      <div className="w-[327px] h-[420px] flex flex-col items-center justify-center relative py-16 rounded-[16px]"
            style={{
              border: '0.7px solid transparent',
              borderColor: '#FF6F00',
@@ -44,32 +44,32 @@ export default function StartingPage({ onFinish }) {
           className="mb-8"
         />
         <div className="relative">
-          <svg className="w-[200px] h-[200px] transform -rotate-90">
+          <svg className="w-[140px] h-[140px] transform -rotate-90">
             <circle
-              cx="100"
-              cy="100"
-              r="90"
+              cx="70"
+              cy="70"
+              r="63"
               fill="transparent"
               stroke="#2C2C2C"
               strokeWidth="2"
             />
             <circle
-              cx="100"
-              cy="100"
-              r="90"
+              cx="70"
+              cy="70"
+              r="63"
               fill="transparent"
               stroke="#FF6F00"
               strokeWidth="5"
-              strokeDasharray={`${2 * Math.PI * 90}`}
-              strokeDashoffset={`${2 * Math.PI * 90 * (1 - progress / 100)}`}
+              strokeDasharray={`${2 * Math.PI * 63}`}
+              strokeDashoffset={`${2 * Math.PI * 63 * (1 - progress / 100)}`}
               strokeLinecap="round"
             />
           </svg>
           <Image
             src="/assets/starting-page/center-logo.png"
             alt="Center Logo"
-            width={61}
-            height={72}
+            width={43}
+            height={50}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           />
         </div>
