@@ -1,4 +1,4 @@
-﻿const StarSwitchOff = () => {
+const StarSwitchOn = () => {
   return (
     <div className="stars-switch stars-on">
       <svg
@@ -111,6 +111,7 @@
         </defs>
       </svg>
     </div>
-  );
-};
-export default StarSwitchOff;
+  )
+}
+
+export default StarSwitchOn

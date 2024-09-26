@@ -1,8 +1,14 @@
-﻿import Link from "next/link"
+﻿'use client'
+import Link from "next/link"
 import Image from "next/image";
-import StarSwitch from "./Starswitch";
+import { usePathname } from "next/navigation";
+import StarSwitchOff from "/components/starsOff/StarSwitch";
+import StarSwitchOn from "/components/StarsOn/StarSwitch";
 
 const Header = () => {
+  const pathname = usePathname();
+  const isStarsOnPage = pathname === '/stars-on';
+
   const imageProps = {
     width: 44,
     height: 44,
@@ -14,7 +20,9 @@ const Header = () => {
     <header className="flex justify-between items-center">
       <div className="flex items-center w-1/2">
         <span className="text-white p-4 py-1 flex items-left">
-          <StarSwitch />
+          <Link href={isStarsOnPage ? '/' : '/stars-on'}>
+            {isStarsOnPage ? <StarSwitchOn /> : <StarSwitchOff />}
+          </Link>
         </span>
       </div>          
       <div className="flex space-x-2 pr-4 pt-3 items-center">
