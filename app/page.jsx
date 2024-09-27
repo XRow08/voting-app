@@ -109,7 +109,7 @@ export default function Home() {
   };
 
   if (showStartingPage) {
-    return <StartingPage onFinish={() => setShowStartingPage(false)} />;
+    //return <StartingPage onFinish={() => setShowStartingPage(false)} />;
   }
 
   return (
