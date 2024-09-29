@@ -15,6 +15,7 @@ export default function VotingArea({ handleVote }) {
   useEffect(() => {
     audioRef.current = new Audio('/assets/animations/vote_sound.wav');
     audioRef.current.playbackRate = 1;
+    audioRef.current.volume = 0.05;
   }, []);
 
   const handleVoteClick = (voteType) => {

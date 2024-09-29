@@ -245,3 +245,14 @@ body {
 .flip-coin {
   animation: flip-coin 0.5s ease-in-out;
 }
+
+.border-gradient-gold {
+border: 2px solid;
+border-image-source: linear-gradient(180deg, #FFDB69 -0.15%, #FEE7B0 17.84%, #FEE9BA 23.85%, #FDECD0 25.77%, #FEDA92 29.38%, #FFCD64 32.39%, #FFC853 33.9%, #FF9114 75.98%, #F57E16 99.85%);
+}
+.bg-counter{
+  /*background: linear-gradient(261.42deg, #FFD59A 28.39%, #ECB76B 80.57%, #F57F17 105.1%);*/
+  background: linear-gradient(261.42deg, #FFD59A 28.39%, #ECB76B 80.57%, #F57F17 105.1%);
+}
+
+
