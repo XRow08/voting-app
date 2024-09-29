@@ -16,6 +16,8 @@ const Header = () => {
     priority: true
   };
 
+  const folderName = isStarsOnPage ? 'stars-on' : 'stars-off';
+
   return (
     <header className="flex justify-between items-center">
       <div className="flex items-center w-1/2">
@@ -28,14 +30,14 @@ const Header = () => {
       <div className="flex space-x-2 pr-4 pt-3 items-center">
         <Link href="/">
           <Image
-            src="/assets/stars-off/question-icon.png"
+            src={`/assets/${folderName}/question-icon.png`}
             alt="Question Icon"
             {...imageProps}
           />
         </Link>
         <Link href="https://x.com/duelstakes?s=duelstakes" target="_blank">
           <Image
-            src="/assets/stars-off/x-icon.png"
+            src={`/assets/${folderName}/x-icon.png`}
             alt="Close"
             {...imageProps}
           />
