@@ -181,22 +181,6 @@ export default function Home() {
       {/* Info Section */}
       <InfoSection />
 
-
-      {/* Bet with Stars Button */}
-      <div className="flex justify-center items-center w-full max-w-md mt-10">
-      <Link href="/">
-          <Image
-            src="/assets/stars-off/bet-with-stars.png"
-            alt="Bet With Stars"
-            width={234}
-            height={150}
-            quality={100}
-            priority
-          />
-          </Link>
-        </div>
-
-
     </div>
   );
 }
