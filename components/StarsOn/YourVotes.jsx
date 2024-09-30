@@ -9,7 +9,7 @@ export default function YourVotes({ userVotes }) {
             <div className="flex items-center">
                 <div className="relative mr-3">
                     <Image
-                        src="/assets/stars-off/animation-bg.png"
+                        src="/assets/stars-on/animation-bg.png"
                         alt="Your Votes Background"
                         width={40}
                         height={40}
@@ -20,6 +20,7 @@ export default function YourVotes({ userVotes }) {
                             alt="Hands Animation"
                             width={24}
                             height={24}
+                            unoptimized
                         />
                     </div>
                 </div>

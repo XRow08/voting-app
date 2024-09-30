@@ -17,7 +17,7 @@ export default function InfoSection() {
           <Image
             src="/assets/stars-on/getstars.png"
             alt="Get Stars Now"
-            width={166}
+            width={200}
             height={44}
           />
           </Link>

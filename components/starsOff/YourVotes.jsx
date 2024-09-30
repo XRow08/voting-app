@@ -20,6 +20,7 @@ export default function YourVotes({ userVotes }) {
                             alt="Hands Animation"
                             width={24}
                             height={24}
+                            unoptimized
                         />
                     </div>
                 </div>

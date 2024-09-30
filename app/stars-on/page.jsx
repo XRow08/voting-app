@@ -132,6 +132,7 @@ export default function Home() {
                 alt="Hands Animation"
                 width={100}
                 height={100}
+                unoptimized
               />
             </div>
           </div>
@@ -142,7 +143,7 @@ export default function Home() {
 
 
       {/* Main Section */}
-      <div className="text-center mt-4 z-50">
+      <div className="text-center mt-4 z-40">
         <h1 className="font-space-grotesk text-[16px] text-white font-light leading-[16px] text-center">TAP TO VOTE</h1>
         <h2 className="font-space-grotesk text-[24px] font-bold text-white leading-[24px] text-center mt-2">WHO WILL BE THE<br/>NEXT PRESIDENT?</h2>
       </div>
